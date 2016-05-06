@@ -96,11 +96,13 @@ extension LearnViewController : DrawingViewDelegate {
     
     func drawingView(drawingView: DrawingView, didFinishDrawingImage image: UIImage) {
         
-        
         guard let dimension = self.shapeClassifyingNetwork?.inputDimension else {
             print("Learn controller does not have a neural network to work with!")
             return
         }
+        
+        // Get an appropriately scaled image and convert it to
+        // an array of grayscale Float values:
         
         // This scaling also results in a scaled stroke:
         //let scaledImage = image.imageScaledToSize(CGSize(width:dimension, height:dimension), withBorder:4.0)
@@ -110,8 +112,10 @@ extension LearnViewController : DrawingViewDelegate {
         self.sampleImageView.image = scaledImage
         
         let grayscaleData = scaledImage.grayscaleImageData(inverted:true)
-        //printInputData(grayscaleData, stride: dimension)
+            //printInputData(grayscaleData, stride: dimension)
 
+        // Classify the data:
+        
         guard let neuralNetwork = self.shapeClassifyingNetwork?.neuralNework else {
             print("Learn controller does not have a neural network to work with!")
             return
@@ -148,63 +152,84 @@ extension LearnViewController : DrawingViewDelegate {
                 print("Detected: Unknown shape, \(confidence)")
             }
 
-            var statusString = String(format: "Detected a %@, confidence %.2f%%", shapeName, confidence * 100.0)
-            
-            var shapeToLearn: Shape? = nil
-            if ( self.learnSquareSwitch.on ) { shapeToLearn = .Square }
-            if ( self.learnCircleSwitch.on ) { shapeToLearn = .Circle }
-            if ( self.learnTriangleSwitch.on ) { shapeToLearn = .Triangle }
-            
-            guard let selectedShape = shapeToLearn else {
-                self.statusLabel.text = statusString
-                return
-            }
-            
-            var answer = [Float](count: 3, repeatedValue:0.0)
-            answer[selectedShape.rawValue] = 1.0
-            
-            print("Learning that last shape was a: \(selectedShape.toString())")
-            print("(answer: \(answer)")
-
-            statusString = statusString + "\nLearing last shape was a \(selectedShape)."
+            let statusString = String(format: "Detected a %@, confidence %.2f%%", shapeName, confidence * 100.0)
             self.statusLabel.text = statusString
             
-            var error: Float = 1.0
-            while error > 0.1 {
-                try error = neuralNetwork.backpropagate(answer: answer)
-                try neuralNetwork.update(inputs: grayscaleData)
-                print ("TRAINED: \(error)")
+            // Train with the result if user indicated
+            
+            var selectedShape: Shape? = nil
+            if ( self.learnSquareSwitch.on ) { selectedShape = .Square }
+            if ( self.learnCircleSwitch.on ) { selectedShape = .Circle }
+            if ( self.learnTriangleSwitch.on ) { selectedShape = .Triangle }
+            
+            if let shapeToLearn = selectedShape {
+                self.trainNetwork(withInputData: grayscaleData, correctShape: shapeToLearn)
+                self.saveTrainingImage(scaledImage, forShapeType: shapeToLearn)
+                   // stash off the shape to build up an archive for training:
             }
-            
-            // stash off the shape to build up an archive for training:
-            
-            let manager = NSFileManager.defaultManager()
-            let documentsDirectory = try! manager.URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
-            let shapesDirectory = documentsDirectory.URLByAppendingPathComponent(selectedShape.toString())
-            let filename = NSUUID.init().UUIDString
-            
-            do {
-                try manager.createDirectoryAtURL(shapesDirectory, withIntermediateDirectories: false, attributes: nil)
-            }
-            catch let error as NSError {
-                if ( error.code != NSFileWriteFileExistsError )
-                {
-                    print(error)
-                }
-            }
-            
-            guard let imageData = UIImagePNGRepresentation(scaledImage) else {
-                print(error)
-                return
-            }
-            
-            let imageURL = shapesDirectory.URLByAppendingPathComponent(filename)
-            imageData.writeToURL(imageURL, atomically: true)
-            
             
         } catch {
             print(error)
         }
+    }
+    
+    //MARK: Training 
+    
+    func trainNetwork(withInputData inputData: [Float], correctShape: Shape) {
+        
+        // translate from Shape to output array:
+        var answer = [Float](count: 3, repeatedValue:0.0)
+        answer[correctShape.rawValue] = 1.0
+        
+        print("Learning that last shape was a: \(correctShape.toString())")
+        print("(answer: \(answer)")
+        
+        var statusString = self.statusLabel.text ?? ""
+        statusString = statusString + "\nLearing last shape was a \(correctShape)."
+        self.statusLabel.text = statusString
+        
+        guard let neuralNetwork = self.shapeClassifyingNetwork?.neuralNework else {
+            return
+        }
+        
+        var error: Float = 1.0
+        while error > 0.1 {
+            do {
+                try error = neuralNetwork.backpropagate(answer: answer)
+                try neuralNetwork.update(inputs: inputData)
+                print ("TRAINED: \(error)")
+            }
+            catch {
+                print("Problem trianing network: \(error)")
+            }
+        }
+    }
+    
+    func saveTrainingImage(image: UIImage, forShapeType shapeType:Shape) {
+        let manager = NSFileManager.defaultManager()
+        let documentsDirectory = try! manager.URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
+        let shapesDirectory = documentsDirectory.URLByAppendingPathComponent(shapeType.toString())
+        let filename = NSUUID.init().UUIDString
+        
+        do {
+            try manager.createDirectoryAtURL(shapesDirectory, withIntermediateDirectories: false, attributes: nil)
+        }
+        catch let error as NSError {
+            if ( error.code != NSFileWriteFileExistsError )
+            {
+                print(error)
+            }
+        }
+        
+        guard let imageData = UIImagePNGRepresentation(image) else {
+            print("Could not create PNG represenation of training image: \(image)")
+            return
+        }
+        
+        let imageURL = shapesDirectory.URLByAppendingPathComponent(filename)
+        let result = imageData.writeToURL(imageURL, atomically: true)
+        
+        if ( !result ) { print("Could not save training image to URL: \(imageURL)") }
     }
     
     //MARK: Debugging
