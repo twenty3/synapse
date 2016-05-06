@@ -32,12 +32,3 @@ enum Shape: Int {
         }
     }
 }
-
-
-enum Digit: Int {
-    case Zero = 0, One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Last
-    
-    static let count: Int = {
-        return Digit.Last.rawValue
-    }()
-}

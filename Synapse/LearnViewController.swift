@@ -82,7 +82,7 @@ class LearnViewController: UIViewController {
     }
 }
 
-// MARK: - DrawingViewDelegate
+// MARK: DrawingViewDelegate
 
 extension LearnViewController : DrawingViewDelegate {
     
@@ -97,19 +97,10 @@ extension LearnViewController : DrawingViewDelegate {
         
         let grayscaleData = scaledImage.grayscaleImageData(inverted:true)
         
-        //TODO: pull this off into a function for clarity
         
         // visualize the array in characters for debugging:
-        for index in 0.stride(to:dimension*dimension, by:dimension) {
-            
-            let pretty = grayscaleData[index..<index+dimension].map({ (grayValue) -> String in
-                if ( grayValue == 1.0 ){ return "." }
-                return "*"
-            })
-            
-            print(pretty)
-        }
-        
+        printInputData(grayscaleData, stride: dimension)
+
         guard let neuralNetwork = self.neuralNetwork else {
             print("Learn controller does not have a neural network to work with!")
             return
@@ -147,33 +138,6 @@ extension LearnViewController : DrawingViewDelegate {
             }
 
             var statusString = String(format: "Detected a %@, confidence %.2f%%", shapeName, confidence * 100.0)
-//            let digit = Digit(rawValue: output.indexOf(detected)!)
-//            
-//            switch digit! {
-//            case .Zero:
-//                print("Detected: Zero, \(confidence)");
-//            case .One:
-//                print("Detected: One, \(confidence)");
-//            case.Two:
-//                print("Detected: Two, \(confidence)")
-//            case .Three:
-//                print("Detected: Three, \(confidence)")
-//            case .Four:
-//                print("Detected: Four, \(confidence)")
-//            case .Five:
-//                print("Detected: Five, \(confidence)")
-//            case .Six:
-//                print("Detected: Six, \(confidence)")
-//            case .Seven:
-//                print("Detected: Seven, \(confidence)")
-//            case .Eight:
-//                print("Detected: Eight, \(confidence)")
-//            case .Nine:
-//                print("Detected: Nine, \(confidence)")
-//
-//            default:
-//                print("Detected: Unknown Digit, \(confidence)")
-//            }
             
             var shapeToLearn: Shape? = nil
             if ( self.learnSquareSwitch.on ) { shapeToLearn = .Square }
@@ -230,8 +194,20 @@ extension LearnViewController : DrawingViewDelegate {
         } catch {
             print(error)
         }
-        
-        
+    }
+    
+    //MARK: Debugging
+    
+    func printInputData(data: [Float], stride: Int) {
+        for index in 0.stride(to:stride * stride, by:stride) {
+            
+            let pretty = data[index ..< index + stride].map({ (grayValue) -> String in
+                if ( grayValue == 1.0 ){ return "." }
+                return "*"
+            })
+            
+            print(pretty)
+        }
     }
     
 }
