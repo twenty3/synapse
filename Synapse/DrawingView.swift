@@ -11,6 +11,7 @@ import UIKit
 // MARK: DrawingViewDelegate
 
 protocol DrawingViewDelegate: class {
+    func minimumImageSizeForDrawingView(drawingView: DrawingView) -> CGSize
     func drawingView(drawingView: DrawingView, didFinishDrawingImage image: UIImage)
 }
 
@@ -45,16 +46,15 @@ class DrawingView: UIView {
             // the drawn bounds of the path is larger than the unstroked path defined by the UIBezierPath
             // so we enlarge the area by the stroke width to get something closer to the actual drawn bounds
         
-        //TODO: cleanup magic numbers
-        let minDimension: CGFloat = 28.0
+        let minSize = self.delegate?.minimumImageSizeForDrawingView(self) ?? CGSize(width: 28.0, height: 28.0)
         
-        if ( pathBounds.size.width < minDimension ) {
-            let delta = (minDimension - pathBounds.size.width) / 2.0
+        if ( pathBounds.size.width < minSize.width ) {
+            let delta = (minSize.width - pathBounds.size.width) / 2.0
             pathBounds = CGRectInset(pathBounds, -delta, 0)
         }
 
-        if ( pathBounds.size.height < minDimension ) {
-            let delta = (minDimension - pathBounds.size.height) / 2.0
+        if ( pathBounds.size.height < minSize.height ) {
+            let delta = (minSize.height - pathBounds.size.height) / 2.0
             pathBounds = CGRectInset(pathBounds, 0.0, -delta)
         }
         

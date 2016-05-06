@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		011CD7361CD6D83900CA1B53 /* UIImage+Synapse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011CD7351CD6D83900CA1B53 /* UIImage+Synapse.swift */; };
 		011CD7381CD72E2F00CA1B53 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011CD7371CD72E2F00CA1B53 /* Shape.swift */; };
+		014B683D1CDD0918005AAF08 /* ShapeClassifyingNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014B683C1CDD0918005AAF08 /* ShapeClassifyingNetwork.swift */; };
 		015658561CD9C49900B18BB7 /* FFNN+Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015658541CD9C49900B18BB7 /* FFNN+Storage.swift */; };
 		015658571CD9C49900B18BB7 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015658551CD9C49900B18BB7 /* Storage.swift */; };
 		015658591CD9C4BC00B18BB7 /* handwriting-ffnn in Resources */ = {isa = PBXBuildFile; fileRef = 015658581CD9C4BC00B18BB7 /* handwriting-ffnn */; };
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		011CD7351CD6D83900CA1B53 /* UIImage+Synapse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Synapse.swift"; sourceTree = "<group>"; };
 		011CD7371CD72E2F00CA1B53 /* Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
+		014B683C1CDD0918005AAF08 /* ShapeClassifyingNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeClassifyingNetwork.swift; sourceTree = "<group>"; };
 		015658541CD9C49900B18BB7 /* FFNN+Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "FFNN+Storage.swift"; path = "library/Swift-AI-master/Source/FFNN+Storage.swift"; sourceTree = "<group>"; };
 		015658551CD9C49900B18BB7 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Storage.swift; path = "library/Swift-AI-master/Source/Storage.swift"; sourceTree = "<group>"; };
 		015658581CD9C4BC00B18BB7 /* handwriting-ffnn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "handwriting-ffnn"; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				011CD7371CD72E2F00CA1B53 /* Shape.swift */,
 				01739A231CC47A1A008EDC90 /* AppDelegate.swift */,
 				01739A371CC47B9C008EDC90 /* LearnViewController.swift */,
+				014B683C1CDD0918005AAF08 /* ShapeClassifyingNetwork.swift */,
 				01739A3B1CC47BBD008EDC90 /* CanvasViewController.swift */,
 				01E271F01CC4928100B91EEB /* DrawingView.swift */,
 				011CD7351CD6D83900CA1B53 /* UIImage+Synapse.swift */,
@@ -171,6 +174,7 @@
 				01739A391CC47B9C008EDC90 /* LearnViewController.swift in Sources */,
 				01739A3F1CC47E83008EDC90 /* FFNN.swift in Sources */,
 				01E271F11CC4928100B91EEB /* DrawingView.swift in Sources */,
+				014B683D1CDD0918005AAF08 /* ShapeClassifyingNetwork.swift in Sources */,
 				011CD7381CD72E2F00CA1B53 /* Shape.swift in Sources */,
 				011CD7361CD6D83900CA1B53 /* UIImage+Synapse.swift in Sources */,
 				015658571CD9C49900B18BB7 /* Storage.swift in Sources */,

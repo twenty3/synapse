@@ -12,20 +12,20 @@ class LearnViewController: UIViewController {
 
     // MARK: - Public Properties 
     
-    var neuralNetwork:FFNN?
+    var shapeClassifyingNetwork: ShapeClasifyingNetwork?
     
     // MARK: - Private Properties
     
     @IBOutlet private weak var sampleView: UIView!
     @IBOutlet private weak var sampleImageView: UIImageView!
     @IBOutlet private weak var sampleBackgroundView: UIView!
-    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet private weak var statusLabel: UILabel!
     @IBOutlet private weak var scratchPadView: DrawingView!
     @IBOutlet private weak var scratchPadViewLabel: UILabel!
     
     @IBOutlet private weak var learnSquareSwitch: UISwitch!
     @IBOutlet private weak var learnCircleSwitch: UISwitch!
-    @IBOutlet weak var learnTriangleSwitch: UISwitch!
+    @IBOutlet private weak var learnTriangleSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +47,7 @@ class LearnViewController: UIViewController {
     // MARK: Actions
     
     @IBAction private func saveButtonTapped(sender: AnyObject) {
-        self.neuralNetwork?.writeToFile("shapes-ffnn")
+        self.shapeClassifyingNetwork?.neuralNework.writeToFile("shapes-ffnn")
         print("Saved network to documents directory")
     }
     
@@ -86,22 +86,33 @@ class LearnViewController: UIViewController {
 
 extension LearnViewController : DrawingViewDelegate {
     
+    func minimumImageSizeForDrawingView(drawingView: DrawingView) -> CGSize {
+        var minimumSize = CGSize(width: 28.0, height: 28.0)
+        if let inputDimension = self.shapeClassifyingNetwork?.inputDimension {
+            minimumSize = CGSize(width: inputDimension, height: inputDimension)
+        }
+        return minimumSize
+    }
+    
     func drawingView(drawingView: DrawingView, didFinishDrawingImage image: UIImage) {
         
-        //TODO: width and height should be tied to FFNN input size
-        let dimension = 28
         
+        guard let dimension = self.shapeClassifyingNetwork?.inputDimension else {
+            print("Learn controller does not have a neural network to work with!")
+            return
+        }
+        
+        // This scaling also results in a scaled stroke:
         //let scaledImage = image.imageScaledToSize(CGSize(width:dimension, height:dimension), withBorder:4.0)
+        
+        // This scaling keeps the stroke width constant:
         let scaledImage = drawingView.drawingAsImage(withSize: CGSize(width: dimension, height: dimension))
         self.sampleImageView.image = scaledImage
         
         let grayscaleData = scaledImage.grayscaleImageData(inverted:true)
-        
-        
-        // visualize the array in characters for debugging:
-        printInputData(grayscaleData, stride: dimension)
+        //printInputData(grayscaleData, stride: dimension)
 
-        guard let neuralNetwork = self.neuralNetwork else {
+        guard let neuralNetwork = self.shapeClassifyingNetwork?.neuralNework else {
             print("Learn controller does not have a neural network to work with!")
             return
         }
