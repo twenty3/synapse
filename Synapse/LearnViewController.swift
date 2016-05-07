@@ -19,6 +19,8 @@ class LearnViewController: UIViewController {
     @IBOutlet private weak var sampleView: UIView!
     @IBOutlet private weak var sampleImageView: UIImageView!
     @IBOutlet private weak var sampleBackgroundView: UIView!
+    @IBOutlet private weak var detectedLabel: UILabel!
+    @IBOutlet private weak var detectedBackgroundView: UIView!
     @IBOutlet private weak var statusLabel: UILabel!
     @IBOutlet private weak var scratchPadView: DrawingView!
     @IBOutlet private weak var scratchPadViewLabel: UILabel!
@@ -27,15 +29,22 @@ class LearnViewController: UIViewController {
     @IBOutlet private weak var learnCircleSwitch: UISwitch!
     @IBOutlet private weak var learnTriangleSwitch: UISwitch!
     
+    // MARK: UIViewController 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.statusLabel.text = ""
+        self.detectedLabel.text = ""
         
         self.sampleImageView.layer.cornerRadius = 10.0
         self.sampleImageView.layer.masksToBounds = true
         self.sampleBackgroundView.layer.cornerRadius = 10.0
         self.sampleBackgroundView.layer.masksToBounds = true
+        self.detectedBackgroundView.layer.cornerRadius = 10.0
+        self.detectedBackgroundView.layer.masksToBounds = true
+        self.detectedLabel.layer.cornerRadius = 10.0
+        self.detectedLabel.layer.masksToBounds = true
         
         self.learnSquareSwitch.setOn(false, animated: false)
         self.learnCircleSwitch.setOn(false, animated: false)
@@ -79,6 +88,65 @@ class LearnViewController: UIViewController {
         UIView.transitionWithView(self.scratchPadViewLabel, duration: 0.33, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { 
             self.scratchPadViewLabel.text = title;
             }, completion: nil)
+    }
+    
+    //MARK: Training
+    
+    func trainNetwork(withInputData inputData: [Float], correctShape: Shape) {
+        
+        // translate from Shape to output array:
+        var answer = [Float](count: 3, repeatedValue:0.0)
+        answer[correctShape.rawValue] = 1.0
+        
+        print("Learning that last shape was a: \(correctShape.toString())")
+        print("(answer: \(answer)")
+        
+        var statusString = self.statusLabel.text ?? ""
+        statusString = statusString + "\nLearing last shape was a \(correctShape)."
+        self.statusLabel.text = statusString
+        
+        guard let neuralNetwork = self.shapeClassifyingNetwork?.neuralNework else {
+            return
+        }
+        
+        var error: Float = 1.0
+        while error > 0.1 {
+            do {
+                try error = neuralNetwork.backpropagate(answer: answer)
+                try neuralNetwork.update(inputs: inputData)
+                print ("TRAINED: \(error)")
+            }
+            catch {
+                print("Problem trianing network: \(error)")
+            }
+        }
+    }
+    
+    func saveTrainingImage(image: UIImage, forShapeType shapeType:Shape) {
+        let manager = NSFileManager.defaultManager()
+        let documentsDirectory = try! manager.URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
+        let shapesDirectory = documentsDirectory.URLByAppendingPathComponent(shapeType.toString())
+        let filename = NSUUID.init().UUIDString
+        
+        do {
+            try manager.createDirectoryAtURL(shapesDirectory, withIntermediateDirectories: false, attributes: nil)
+        }
+        catch let error as NSError {
+            if ( error.code != NSFileWriteFileExistsError )
+            {
+                print(error)
+            }
+        }
+        
+        guard let imageData = UIImagePNGRepresentation(image) else {
+            print("Could not create PNG represenation of training image: \(image)")
+            return
+        }
+        
+        let imageURL = shapesDirectory.URLByAppendingPathComponent(filename)
+        let result = imageData.writeToURL(imageURL, atomically: true)
+        
+        if ( !result ) { print("Could not save training image to URL: \(imageURL)") }
     }
 }
 
@@ -137,16 +205,20 @@ extension LearnViewController : DrawingViewDelegate {
             let shape = Shape(rawValue: output.indexOf(detected)!)
 
             var shapeName = "Unknown Shape"
+            var shapeSymbol = ""
             
             switch shape! {
             case .Circle:
                 shapeName = "Circle"
+                shapeSymbol = "⚫︎"
                 print("Detected: Circle, \(confidence)");
             case.Square:
                 shapeName = "Square"
+                shapeSymbol = "■"
                 print("Detected: Square, \(confidence)")
             case .Triangle:
                 shapeName = "Triangle"
+                shapeSymbol = "▲"
                 print("Detected: Triangle, \(confidence)")
             default:
                 print("Detected: Unknown shape, \(confidence)")
@@ -154,6 +226,7 @@ extension LearnViewController : DrawingViewDelegate {
 
             let statusString = String(format: "Detected a %@, confidence %.2f%%", shapeName, confidence * 100.0)
             self.statusLabel.text = statusString
+            self.detectedLabel.text = shapeSymbol
             
             // Train with the result if user indicated
             
@@ -172,67 +245,11 @@ extension LearnViewController : DrawingViewDelegate {
             print(error)
         }
     }
-    
-    //MARK: Training 
-    
-    func trainNetwork(withInputData inputData: [Float], correctShape: Shape) {
-        
-        // translate from Shape to output array:
-        var answer = [Float](count: 3, repeatedValue:0.0)
-        answer[correctShape.rawValue] = 1.0
-        
-        print("Learning that last shape was a: \(correctShape.toString())")
-        print("(answer: \(answer)")
-        
-        var statusString = self.statusLabel.text ?? ""
-        statusString = statusString + "\nLearing last shape was a \(correctShape)."
-        self.statusLabel.text = statusString
-        
-        guard let neuralNetwork = self.shapeClassifyingNetwork?.neuralNework else {
-            return
-        }
-        
-        var error: Float = 1.0
-        while error > 0.1 {
-            do {
-                try error = neuralNetwork.backpropagate(answer: answer)
-                try neuralNetwork.update(inputs: inputData)
-                print ("TRAINED: \(error)")
-            }
-            catch {
-                print("Problem trianing network: \(error)")
-            }
-        }
-    }
-    
-    func saveTrainingImage(image: UIImage, forShapeType shapeType:Shape) {
-        let manager = NSFileManager.defaultManager()
-        let documentsDirectory = try! manager.URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
-        let shapesDirectory = documentsDirectory.URLByAppendingPathComponent(shapeType.toString())
-        let filename = NSUUID.init().UUIDString
-        
-        do {
-            try manager.createDirectoryAtURL(shapesDirectory, withIntermediateDirectories: false, attributes: nil)
-        }
-        catch let error as NSError {
-            if ( error.code != NSFileWriteFileExistsError )
-            {
-                print(error)
-            }
-        }
-        
-        guard let imageData = UIImagePNGRepresentation(image) else {
-            print("Could not create PNG represenation of training image: \(image)")
-            return
-        }
-        
-        let imageURL = shapesDirectory.URLByAppendingPathComponent(filename)
-        let result = imageData.writeToURL(imageURL, atomically: true)
-        
-        if ( !result ) { print("Could not save training image to URL: \(imageURL)") }
-    }
-    
-    //MARK: Debugging
+}
+
+//MARK: Debugging
+
+extension LearnViewController {
     
     func printInputData(data: [Float], stride: Int) {
         for index in 0.stride(to:stride * stride, by:stride) {
@@ -245,5 +262,4 @@ extension LearnViewController : DrawingViewDelegate {
             print(pretty)
         }
     }
-    
 }
