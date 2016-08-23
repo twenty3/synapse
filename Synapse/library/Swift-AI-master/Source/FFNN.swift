@@ -360,7 +360,7 @@ public extension FFNN {
     public static func getFileURL(filename: String) -> NSURL {
         let manager = NSFileManager.defaultManager()
         let dirURL = try! manager.URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
-        return dirURL.URLByAppendingPathComponent(filename)
+        return dirURL.URLByAppendingPathComponent(filename)!
     }
     
     /// Reads a FFNN stored in a file at the given URL.

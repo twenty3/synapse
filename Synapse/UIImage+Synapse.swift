@@ -31,7 +31,7 @@ extension UIImage {
         UIRectFill(CGRect(origin: CGPointZero, size: size))
 
         let context = UIGraphicsGetCurrentContext()
-        CGContextSetInterpolationQuality(context, CGInterpolationQuality.None)
+        CGContextSetInterpolationQuality(context!, CGInterpolationQuality.None)
 
         var targetRect = CGRect(origin: CGPointZero, size: size)
         targetRect = CGRectInset(targetRect, borderWidth, borderWidth)
@@ -41,7 +41,7 @@ extension UIImage {
         
         UIGraphicsEndImageContext()
         
-        return scaledImage
+        return scaledImage!
     }
     
     /* 
@@ -59,8 +59,8 @@ extension UIImage {
     func grayscaleImageData(inverted inverted:Bool ) -> [Float] {
         let imageRef = self.CGImage;
         
-        let imageHeight = CGImageGetHeight(imageRef)           
-        let imageWidth = CGImageGetWidth(imageRef)
+        let imageHeight = CGImageGetHeight(imageRef!)           
+        let imageWidth = CGImageGetWidth(imageRef!)
         
         var bitmapInfo: UInt32 = CGBitmapInfo.ByteOrder32Big.rawValue
         bitmapInfo |= CGImageAlphaInfo.PremultipliedLast.rawValue & CGBitmapInfo.AlphaInfoMask.rawValue
@@ -76,7 +76,7 @@ extension UIImage {
             return [Float]()
         }
         
-        CGContextDrawImage(imageContext, CGRect(origin: CGPointZero, size: self.size), imageRef)
+        CGContextDrawImage(imageContext, CGRect(origin: CGPointZero, size: self.size), imageRef!)
 
         let pixels = UnsafeMutableBufferPointer<UInt8>(start: imageData, count: imageWidth * imageHeight * bytesPerPixel)
         

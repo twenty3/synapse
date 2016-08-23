@@ -129,7 +129,7 @@ class LearnViewController: UIViewController {
         let filename = NSUUID.init().UUIDString
         
         do {
-            try manager.createDirectoryAtURL(shapesDirectory, withIntermediateDirectories: false, attributes: nil)
+            try manager.createDirectoryAtURL(shapesDirectory!, withIntermediateDirectories: false, attributes: nil)
         }
         catch let error as NSError {
             if ( error.code != NSFileWriteFileExistsError )
@@ -143,8 +143,8 @@ class LearnViewController: UIViewController {
             return
         }
         
-        let imageURL = shapesDirectory.URLByAppendingPathComponent(filename)
-        let result = imageData.writeToURL(imageURL, atomically: true)
+        let imageURL = shapesDirectory!.URLByAppendingPathComponent(filename)
+        let result = imageData.writeToURL(imageURL!, atomically: true)
         
         if ( !result ) { print("Could not save training image to URL: \(imageURL)") }
     }

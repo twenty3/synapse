@@ -58,15 +58,15 @@ class DrawingView: UIView {
             pathBounds = CGRectInset(pathBounds, 0.0, -delta)
         }
         
-        let imageScale = image.scale
+        let imageScale = image!.scale
         pathBounds = pathBounds.rectScaledBy(imageScale)
             // path bounds are in points, but we need to specify our cropping in pixels
         
-        guard let croppedImageRef = CGImageCreateWithImageInRect(image.CGImage, pathBounds) else {
-            return image
+        guard let croppedImageRef = CGImageCreateWithImageInRect(image!.CGImage!, pathBounds) else {
+            return image!
         }
         
-        let croppedImage = UIImage(CGImage: croppedImageRef, scale: imageScale, orientation: image.imageOrientation)
+        let croppedImage = UIImage(CGImage: croppedImageRef, scale: imageScale, orientation: image!.imageOrientation)
         
         return croppedImage
     }
@@ -123,7 +123,7 @@ class DrawingView: UIView {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return image;
+        return image!;
     }
     
     // MARK: - Private Properties

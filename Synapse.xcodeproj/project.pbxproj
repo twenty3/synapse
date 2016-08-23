@@ -73,12 +73,11 @@
 			isa = PBXGroup;
 			children = (
 				015658581CD9C4BC00B18BB7 /* handwriting-ffnn */,
-				011CD7371CD72E2F00CA1B53 /* Shape.swift */,
 				01739A231CC47A1A008EDC90 /* AppDelegate.swift */,
-				01739A371CC47B9C008EDC90 /* LearnViewController.swift */,
-				014B683C1CDD0918005AAF08 /* ShapeClassifyingNetwork.swift */,
 				01739A3B1CC47BBD008EDC90 /* CanvasViewController.swift */,
+				01739A371CC47B9C008EDC90 /* LearnViewController.swift */,
 				01E271F01CC4928100B91EEB /* DrawingView.swift */,
+				01AAB2171D6C13CA00D678F3 /* Shape NN */,
 				011CD7351CD6D83900CA1B53 /* UIImage+Synapse.swift */,
 				01739A291CC47A1A008EDC90 /* Main.storyboard */,
 				01739A3D1CC47E58008EDC90 /* Library */,
@@ -97,6 +96,15 @@
 				015658551CD9C49900B18BB7 /* Storage.swift */,
 			);
 			name = Library;
+			sourceTree = "<group>";
+		};
+		01AAB2171D6C13CA00D678F3 /* Shape NN */ = {
+			isa = PBXGroup;
+			children = (
+				011CD7371CD72E2F00CA1B53 /* Shape.swift */,
+				014B683C1CDD0918005AAF08 /* ShapeClassifyingNetwork.swift */,
+			);
+			name = "Shape NN";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,6 +139,8 @@
 				TargetAttributes = {
 					01739A1F1CC47A1A008EDC90 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = P8653R3C2V;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -295,10 +305,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = P8653R3C2V;
 				INFOPLIST_FILE = Synapse/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.escapeplan.Synapse;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -306,10 +318,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = P8653R3C2V;
 				INFOPLIST_FILE = Synapse/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.escapeplan.Synapse;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
