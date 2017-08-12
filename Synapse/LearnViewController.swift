@@ -16,18 +16,18 @@ class LearnViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    @IBOutlet private weak var sampleView: UIView!
-    @IBOutlet private weak var sampleImageView: UIImageView!
-    @IBOutlet private weak var sampleBackgroundView: UIView!
-    @IBOutlet private weak var detectedLabel: UILabel!
-    @IBOutlet private weak var detectedBackgroundView: UIView!
-    @IBOutlet private weak var statusLabel: UILabel!
-    @IBOutlet private weak var scratchPadView: DrawingView!
-    @IBOutlet private weak var scratchPadViewLabel: UILabel!
+    @IBOutlet fileprivate weak var sampleView: UIView!
+    @IBOutlet fileprivate weak var sampleImageView: UIImageView!
+    @IBOutlet fileprivate weak var sampleBackgroundView: UIView!
+    @IBOutlet fileprivate weak var detectedLabel: UILabel!
+    @IBOutlet fileprivate weak var detectedBackgroundView: UIView!
+    @IBOutlet fileprivate weak var statusLabel: UILabel!
+    @IBOutlet fileprivate weak var scratchPadView: DrawingView!
+    @IBOutlet fileprivate weak var scratchPadViewLabel: UILabel!
     
-    @IBOutlet private weak var learnSquareSwitch: UISwitch!
-    @IBOutlet private weak var learnCircleSwitch: UISwitch!
-    @IBOutlet private weak var learnTriangleSwitch: UISwitch!
+    @IBOutlet fileprivate weak var learnSquareSwitch: UISwitch!
+    @IBOutlet fileprivate weak var learnCircleSwitch: UISwitch!
+    @IBOutlet fileprivate weak var learnTriangleSwitch: UISwitch!
     
     // MARK: UIViewController 
     
@@ -55,37 +55,37 @@ class LearnViewController: UIViewController {
     
     // MARK: Actions
     
-    @IBAction private func saveButtonTapped(sender: AnyObject) {
+    @IBAction fileprivate func saveButtonTapped(_ sender: AnyObject) {
         self.shapeClassifyingNetwork?.neuralNework.writeToFile("shapes-ffnn")
         print("Saved network to documents directory")
     }
     
-    @IBAction private func learnSwitchChanged(sender: AnyObject) {
+    @IBAction fileprivate func learnSwitchChanged(_ sender: AnyObject) {
         
         var title = "⬇︎ Draw a Shape Here ⬇︎"
         
         if (sender as? UISwitch != self.learnSquareSwitch ) {
             self.learnSquareSwitch.setOn(false, animated: true)
         }
-        else if ( self.learnSquareSwitch.on ) {
+        else if ( self.learnSquareSwitch.isOn ) {
             title = "⬇︎ Draw a Square Here ⬇︎"
         }
         
         if (sender as? UISwitch != self.learnCircleSwitch ) {
             self.learnCircleSwitch.setOn(false, animated: true)
         }
-        else if ( self.learnCircleSwitch.on ) {
+        else if ( self.learnCircleSwitch.isOn ) {
             title = "⬇︎ Draw a Circle Here ⬇︎"
         }
         
         if (sender as? UISwitch != self.learnTriangleSwitch ) {
             self.learnTriangleSwitch.setOn(false, animated: true)
         }
-        else if ( self.learnTriangleSwitch.on ) {
+        else if ( self.learnTriangleSwitch.isOn ) {
             title = "⬇︎ Draw a Triangle Here ⬇︎"
         }
      
-        UIView.transitionWithView(self.scratchPadViewLabel, duration: 0.33, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { 
+        UIView.transition(with: self.scratchPadViewLabel, duration: 0.33, options: UIViewAnimationOptions.transitionCrossDissolve, animations: { 
             self.scratchPadViewLabel.text = title;
             }, completion: nil)
     }
@@ -95,7 +95,7 @@ class LearnViewController: UIViewController {
     func trainNetwork(withInputData inputData: [Float], correctShape: Shape) {
         
         // translate from Shape to output array:
-        var answer = [Float](count: 3, repeatedValue:0.0)
+        var answer = [Float](repeating: 0.0, count: 3)
         answer[correctShape.rawValue] = 1.0
         
         print("Learning that last shape was a: \(correctShape.toString())")
@@ -113,7 +113,7 @@ class LearnViewController: UIViewController {
         while error > 0.1 {
             do {
                 try error = neuralNetwork.backpropagate(answer: answer)
-                try neuralNetwork.update(inputs: inputData)
+                try _ = neuralNetwork.update(inputs: inputData)
                 print ("TRAINED: \(error)")
             }
             catch {
@@ -122,14 +122,14 @@ class LearnViewController: UIViewController {
         }
     }
     
-    func saveTrainingImage(image: UIImage, forShapeType shapeType:Shape) {
-        let manager = NSFileManager.defaultManager()
-        let documentsDirectory = try! manager.URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
-        let shapesDirectory = documentsDirectory.URLByAppendingPathComponent(shapeType.toString())
-        let filename = NSUUID.init().UUIDString
+    func saveTrainingImage(_ image: UIImage, forShapeType shapeType:Shape) {
+        let manager = FileManager.default
+        let documentsDirectory = try! manager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+        let shapesDirectory = documentsDirectory.appendingPathComponent(shapeType.toString())
+        let filename = UUID.init().uuidString
         
         do {
-            try manager.createDirectoryAtURL(shapesDirectory!, withIntermediateDirectories: false, attributes: nil)
+            try manager.createDirectory(at: shapesDirectory, withIntermediateDirectories: false, attributes: nil)
         }
         catch let error as NSError {
             if ( error.code != NSFileWriteFileExistsError )
@@ -143,8 +143,8 @@ class LearnViewController: UIViewController {
             return
         }
         
-        let imageURL = shapesDirectory!.URLByAppendingPathComponent(filename)
-        let result = imageData.writeToURL(imageURL!, atomically: true)
+        let imageURL = shapesDirectory.appendingPathComponent(filename)
+        let result = (try? imageData.write(to: imageURL, options: [.atomic])) != nil
         
         if ( !result ) { print("Could not save training image to URL: \(imageURL)") }
     }
@@ -154,7 +154,7 @@ class LearnViewController: UIViewController {
 
 extension LearnViewController : DrawingViewDelegate {
     
-    func minimumImageSizeForDrawingView(drawingView: DrawingView) -> CGSize {
+    func minimumImageSizeForDrawingView(_ drawingView: DrawingView) -> CGSize {
         var minimumSize = CGSize(width: 28.0, height: 28.0)
         if let inputDimension = self.shapeClassifyingNetwork?.inputDimension {
             minimumSize = CGSize(width: inputDimension, height: inputDimension)
@@ -162,7 +162,7 @@ extension LearnViewController : DrawingViewDelegate {
         return minimumSize
     }
     
-    func drawingView(drawingView: DrawingView, didFinishDrawingImage image: UIImage) {
+    func drawingView(_ drawingView: DrawingView, didFinishDrawingImage image: UIImage) {
         
         guard let dimension = self.shapeClassifyingNetwork?.inputDimension else {
             print("Learn controller does not have a neural network to work with!")
@@ -196,27 +196,27 @@ extension LearnViewController : DrawingViewDelegate {
             
             print("Output: \(output)")
             
-            guard let detected = output.maxElement() else {
+            guard let detected = output.max() else {
                 return
             }
             
             let confidence = detected;
             
-            let shape = Shape(rawValue: output.indexOf(detected)!)
+            let shape = Shape(rawValue: output.index(of: detected)!)
 
             var shapeName = "Unknown Shape"
             var shapeSymbol = ""
             
             switch shape! {
-            case .Circle:
+            case .circle:
                 shapeName = "Circle"
                 shapeSymbol = "⚫︎"
                 print("Detected: Circle, \(confidence)");
-            case.Square:
+            case.square:
                 shapeName = "Square"
                 shapeSymbol = "■"
                 print("Detected: Square, \(confidence)")
-            case .Triangle:
+            case .triangle:
                 shapeName = "Triangle"
                 shapeSymbol = "▲"
                 print("Detected: Triangle, \(confidence)")
@@ -231,9 +231,9 @@ extension LearnViewController : DrawingViewDelegate {
             // Train with the result if user indicated
             
             var selectedShape: Shape? = nil
-            if ( self.learnSquareSwitch.on ) { selectedShape = .Square }
-            if ( self.learnCircleSwitch.on ) { selectedShape = .Circle }
-            if ( self.learnTriangleSwitch.on ) { selectedShape = .Triangle }
+            if ( self.learnSquareSwitch.isOn ) { selectedShape = .square }
+            if ( self.learnCircleSwitch.isOn ) { selectedShape = .circle }
+            if ( self.learnTriangleSwitch.isOn ) { selectedShape = .triangle }
             
             if let shapeToLearn = selectedShape {
                 self.trainNetwork(withInputData: grayscaleData, correctShape: shapeToLearn)
@@ -251,10 +251,10 @@ extension LearnViewController : DrawingViewDelegate {
 
 extension LearnViewController {
     
-    func printInputData(data: [Float], stride: Int) {
-        for index in 0.stride(to:stride * stride, by:stride) {
+    func printInputData(_ data: [Float], stride s: Int) {
+        for index in stride(from: 0, to:s * s, by:s) {
             
-            let pretty = data[index ..< index + stride].map({ (grayValue) -> String in
+            let pretty = data[index ..< index + s].map({ (grayValue) -> String in
                 if ( grayValue == 1.0 ){ return "." }
                 return "*"
             })

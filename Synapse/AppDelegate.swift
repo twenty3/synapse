@@ -14,10 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     var window: UIWindow?
     var shapeClassifyingNetwork: ShapeClasifyingNetwork?
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let splitViewController = self.window!.rootViewController as! UISplitViewController
         let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
-        navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
+        navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
         splitViewController.delegate = self
         
         let inputDataDimension = 28
@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         else {
             print("Did not find a saved network, creating a new one")
         
-            let newNetwork = FFNN(inputs: inputDataDimension * inputDataDimension, hidden: 280, outputs: Shape.count, learningRate: 0.75, momentum: 0.1, weights: nil, activationFunction: ActivationFunction.Default, errorFunction: ErrorFunction.Default(average: true))
+            let newNetwork = FFNN(inputs: inputDataDimension * inputDataDimension, hidden: 280, outputs: Shape.count, learningRate: 0.75, momentum: 0.1, weights: nil, activationFunction: ActivationFunction.Default, errorFunction: ErrorFunction.default(average: true))
             self.shapeClassifyingNetwork = ShapeClasifyingNetwork(neuralNework: newNetwork, inputDimension: inputDataDimension)
         }
         

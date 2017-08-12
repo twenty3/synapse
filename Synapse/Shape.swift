@@ -10,22 +10,22 @@ import Foundation
 
 
 enum Shape: Int {
-    case Circle = 0
-    case Square
-    case Triangle
-    case Last
+    case circle = 0
+    case square
+    case triangle
+    case last
     
     static let count: Int = {
-        return Shape.Last.rawValue
+        return Shape.last.rawValue
     }()
     
     func toString() -> String {
         switch self {
-        case .Circle:
+        case .circle:
             return "Circle"
-        case .Square:
+        case .square:
             return "Square"
-        case .Triangle:
+        case .triangle:
             return "Triangle"
         default:
             return "Unknown"

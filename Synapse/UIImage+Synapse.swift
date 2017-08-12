@@ -17,7 +17,7 @@ extension UIImage {
         The resulting image has alpha values stripped and
         the background will be white with a borderWidth pixel border
     */
-    func imageScaledToSize(size: CGSize, withBorder borderWidth: CGFloat) -> UIImage {
+    func imageScaledToSize(_ size: CGSize, withBorder borderWidth: CGFloat) -> UIImage {
       
         assert(borderWidth >= 0.0, "Border should be a positive value")
         assert(borderWidth <= size.width, "Border should be a less than desired width")
@@ -27,16 +27,16 @@ extension UIImage {
             // true says we want an opaque resulting image
         
         // clear to white
-        UIColor.whiteColor().setFill()
-        UIRectFill(CGRect(origin: CGPointZero, size: size))
+        UIColor.white.setFill()
+        UIRectFill(CGRect(origin: CGPoint.zero, size: size))
 
         let context = UIGraphicsGetCurrentContext()
-        CGContextSetInterpolationQuality(context!, CGInterpolationQuality.None)
+        context!.interpolationQuality = CGInterpolationQuality.none
 
-        var targetRect = CGRect(origin: CGPointZero, size: size)
-        targetRect = CGRectInset(targetRect, borderWidth, borderWidth)
+        var targetRect = CGRect(origin: CGPoint.zero, size: size)
+        targetRect = targetRect.insetBy(dx: borderWidth, dy: borderWidth)
         
-        self .drawInRect(targetRect)
+        self .draw(in: targetRect)
         let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
         
         UIGraphicsEndImageContext()
@@ -56,27 +56,27 @@ extension UIImage {
         in performance critical situations, it may make sense to decode
         the data in the format it came in
     */
-    func grayscaleImageData(inverted inverted:Bool ) -> [Float] {
-        let imageRef = self.CGImage;
+    func grayscaleImageData(inverted:Bool ) -> [Float] {
+        let imageRef = self.cgImage;
         
-        let imageHeight = CGImageGetHeight(imageRef!)           
-        let imageWidth = CGImageGetWidth(imageRef!)
+        let imageHeight = imageRef!.height           
+        let imageWidth = imageRef!.width
         
-        var bitmapInfo: UInt32 = CGBitmapInfo.ByteOrder32Big.rawValue
-        bitmapInfo |= CGImageAlphaInfo.PremultipliedLast.rawValue & CGBitmapInfo.AlphaInfoMask.rawValue
-        bitmapInfo |= 0 & CGBitmapInfo.FloatInfoMask.rawValue
+        var bitmapInfo: UInt32 = CGBitmapInfo.byteOrder32Big.rawValue
+        bitmapInfo |= CGImageAlphaInfo.premultipliedLast.rawValue & CGBitmapInfo.alphaInfoMask.rawValue
+        bitmapInfo |= 0 & CGBitmapInfo.floatInfoMask.rawValue
 
         let bitsPerComponent = 8
         let bytesPerPixel = 4
         let bytesPerRow = imageWidth * bytesPerPixel
-        let imageData = UnsafeMutablePointer<UInt8>.alloc(imageWidth * imageHeight * bytesPerPixel)
+        let imageData = UnsafeMutablePointer<UInt8>.allocate(capacity: imageWidth * imageHeight * bytesPerPixel)
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         
-        guard let imageContext = CGBitmapContextCreate(imageData, imageWidth, imageHeight, bitsPerComponent, bytesPerRow, colorSpace, bitmapInfo) else {
+        guard let imageContext = CGContext(data: imageData, width: imageWidth, height: imageHeight, bitsPerComponent: bitsPerComponent, bytesPerRow: bytesPerRow, space: colorSpace, bitmapInfo: bitmapInfo) else {
             return [Float]()
         }
         
-        CGContextDrawImage(imageContext, CGRect(origin: CGPointZero, size: self.size), imageRef!)
+        imageContext.draw(imageRef!, in: CGRect(origin: CGPoint.zero, size: self.size))
 
         let pixels = UnsafeMutableBufferPointer<UInt8>(start: imageData, count: imageWidth * imageHeight * bytesPerPixel)
         
