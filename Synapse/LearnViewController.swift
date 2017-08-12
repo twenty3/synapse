@@ -112,8 +112,8 @@ class LearnViewController: UIViewController {
         var error: Float = 1.0
         while error > 0.1 {
             do {
-                try error = neuralNetwork.backpropagate(answer: answer)
                 try _ = neuralNetwork.update(inputs: inputData)
+                try error = neuralNetwork.backpropagate(answer: answer)
                 print ("TRAINED: \(error)")
             }
             catch {
