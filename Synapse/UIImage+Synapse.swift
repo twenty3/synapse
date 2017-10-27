@@ -10,13 +10,12 @@ import UIKit
 
 extension UIImage {
     
-    /*
-        returns a new image scaled to the specified size
-        The size is treated as pixels and the resulting new image
-        has a scale of 1.0 (1 pt = 1 px)
-        The resulting image has alpha values stripped and
-        the background will be white with a borderWidth pixel border
-    */
+    /// Creates a new image scaled to the specified size. The size is treated as pixels and the resulting new image has a scale of 1.0 (1 pt = 1 px). The resulting image has alpha values stripped and the background will be white with a uniform border.
+    ///
+    /// - Parameters:
+    ///   - size: size in pixels of the generated image
+    ///   - borderWidth: the thickness of the white border added to all sides of the image in pixels
+    /// - Returns: scaled and bordered image
     func imageScaledToSize(_ size: CGSize, withBorder borderWidth: CGFloat) -> UIImage {
       
         assert(borderWidth >= 0.0, "Border should be a positive value")
@@ -44,19 +43,20 @@ extension UIImage {
         return scaledImage!
     }
     
-    /* 
-        returns the pixel data, converted to gray,
-        possibily inverted and ignoring alpha
-        as an array of floats
-     
-        pixel format can vary for a lot of reasons, so it is a bit easier
-        to draw the image into a bitmap with a format of our choosing
-        rather than account for all the possible variants
-     
-        in performance critical situations, it may make sense to decode
-        the data in the format it came in
-    */
+    /// Returns the raw pixel data of this iamge, converted to grayscale as an array of floats
+    ///
+    /// - Parameter inverted: invert the image so white is black and black is white.
+    /// - Returns: array of floats that will be self.size.width * self.size.height in length
     func grayscaleImageData(inverted:Bool ) -> [Float] {
+
+        /*
+         pixel format can vary for a lot of reasons, so it is a bit easier
+         to draw the image into a bitmap with a format of our choosing
+         rather than account for all the possible variants we need to convert from
+         
+         in performance critical situations, it may make sense to decode the source pixel format directly instead of re-drawing
+         */
+        
         let imageRef = self.cgImage;
         
         let imageHeight = imageRef!.height           

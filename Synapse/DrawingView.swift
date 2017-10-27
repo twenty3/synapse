@@ -25,12 +25,9 @@ class DrawingView: UIView {
 
     //MARK: Public Methods
 
-    /*
-     Creates an image of the current path in the view.
-     The resulting image is cropped to the size that just contains
-     what is drawn in the image
-     
-     */
+    ///  Creates an image of the current path in the view. The resulting image is cropped to the size that just contains what is drawn in the image
+    ///
+    /// - Returns: UIImage of the rasterized path, tightly cropped to the path's bounds
     func drawingAsImage() -> UIImage {
         
         UIGraphicsBeginImageContextWithOptions(self.bounds.size, false, 0.0)
@@ -71,10 +68,9 @@ class DrawingView: UIView {
         return croppedImage
     }
 
-    /*
-        Here we scale our path to fit our image size and then stroke it so we have
-        a consistent stroke width regardless of how big or small the original path was sketched
-     */
+    ///  Creates an image of the current path in the view. Path is scaled to exactly fit the given size and then the stroke is applied. This results in a rasterized image of the path with a consistent stroke weight regardless of how big or small the original path was before scaling
+    /// - Parameter size: size in points for the generated UIImage
+    /// - Returns: UIImage of the rasterized path
     func drawingAsImage(withSize size: CGSize) ->UIImage {
         
         //TODO: should the line widths for this normal drawing and this drawing have a relation?
@@ -128,15 +124,14 @@ class DrawingView: UIView {
     
     // MARK: - Private Properties
     
-    fileprivate let path: UIBezierPath = UIBezierPath()
-    fileprivate let strokeWidth: CGFloat = 10.0
+    private let path: UIBezierPath = UIBezierPath()
+    private let strokeWidth: CGFloat = 10.0
     
-    fileprivate var previousPanLocation: CGPoint = CGPoint.zero
-    fileprivate var strokeBoundingRect: CGRect = CGRect.zero
+    private var previousPanLocation: CGPoint = CGPoint.zero
+    private var strokeBoundingRect: CGRect = CGRect.zero
 
-    fileprivate var strokeTimer: Timer?
+    private var strokeTimer: Timer?
 
-    
     //MARK: Life Cycle
 
     override init(frame: CGRect) {
@@ -149,8 +144,7 @@ class DrawingView: UIView {
         self.commonInit()
     }
     
-
-    fileprivate func commonInit() {
+    private func commonInit() {
         let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPan))
         panRecognizer.maximumNumberOfTouches = 1;
         panRecognizer.minimumNumberOfTouches = 1;
@@ -171,14 +165,14 @@ class DrawingView: UIView {
     
     // MARK: Drawing
     
-    fileprivate func clearDrawing() {
+    private func clearDrawing() {
         self.path.removeAllPoints();
         self.setNeedsDisplay()
     }
     
     //MARK: Gestures
     
-    @objc fileprivate func didPan(_ panRecognizer: UIPanGestureRecognizer) {
+    @objc private func didPan(_ panRecognizer: UIPanGestureRecognizer) {
         let location = panRecognizer.location(in: self)
         
         if ( panRecognizer.state == .began )
@@ -199,18 +193,18 @@ class DrawingView: UIView {
         self.setNeedsDisplay()
     }
 
-    fileprivate func panStartedAtLocation(_ location: CGPoint) {
+    private func panStartedAtLocation(_ location: CGPoint) {
         self.path.move(to: location)
         self.strokeTimer?.invalidate()
     }
     
-    fileprivate func panMovedToLocation(_ location: CGPoint) {
+    private func panMovedToLocation(_ location: CGPoint) {
         let midPoint = location.midpointTo(self.previousPanLocation)
         self.path.addQuadCurve(to: midPoint, controlPoint: self.previousPanLocation);
         self.strokeTimer?.invalidate()
     }
     
-    fileprivate func panEndedAtLocation(_ location: CGPoint) {
+    private func panEndedAtLocation(_ location: CGPoint) {
         let midPoint = location.midpointTo(self.previousPanLocation)
         self.path.addQuadCurve(to: midPoint, controlPoint: self.previousPanLocation);
         self.strokeTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(strokeTimerFired), userInfo: nil, repeats: false)
@@ -218,7 +212,7 @@ class DrawingView: UIView {
     
     // MARK: Timer
     
-    @objc fileprivate func strokeTimerFired(_ sender: Timer){
+    @objc private func strokeTimerFired(_ sender: Timer){
         let drawingImage = self.drawingAsImage()
         self.delegate?.drawingView(self, didFinishDrawingImage: drawingImage)
         
