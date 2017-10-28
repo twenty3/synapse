@@ -10,6 +10,6 @@ import Foundation
 
 
 struct ShapeClasifyingNetwork {
-    let neuralNework: FFNN
+    let neuralNework: NeuralNet
     let inputDimension: Int
 }

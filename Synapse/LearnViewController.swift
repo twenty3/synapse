@@ -55,12 +55,16 @@ class LearnViewController: UIViewController {
     
     // MARK: Actions
     
-    @IBAction fileprivate func saveButtonTapped(_ sender: AnyObject) {
-        self.shapeClassifyingNetwork?.neuralNework.writeToFile("shapes-ffnn")
-        print("Saved network to documents directory")
+    @IBAction private func saveButtonTapped(_ sender: AnyObject) {
+        do {
+            try self.shapeClassifyingNetwork?.neuralNework.save(to: URL.documentsURL(with: "shapes-ffnn"))
+            print("Saved network to documents directory")
+        } catch {
+            print("Error attempting to save network: \(error)")
+        }
     }
     
-    @IBAction fileprivate func learnSwitchChanged(_ sender: AnyObject) {
+    @IBAction private func learnSwitchChanged(_ sender: AnyObject) {
         
         var title = "⬇︎ Draw a Shape Here ⬇︎"
         
@@ -108,17 +112,28 @@ class LearnViewController: UIViewController {
         guard let neuralNetwork = self.shapeClassifyingNetwork?.neuralNework else {
             return
         }
+
+        let errorThreshold: Float = 0.1
         
-        var error: Float = 1.0
-        while error > 0.1 {
-            do {
-                try _ = neuralNetwork.update(inputs: inputData)
-                try error = neuralNetwork.backpropagate(answer: answer)
-                print ("TRAINED: \(error)")
+        do {
+            var lastInferred = [Float]()
+            var error: Float = 1.0
+            try _ = neuralNetwork.infer(inputData)
+            
+            while true {
+                if ( error < errorThreshold ) { break }
+                
+                try neuralNetwork.backpropagate(answer)
+                lastInferred = try neuralNetwork.infer(inputData)
+                
+                error = NeuralNet.ErrorFunction.meanSquared.computeError(real: lastInferred, target: answer, rows: 1, cols: answer.count)
+                
+                print ("TRAINED, error after back propagation: \(error)")
             }
-            catch {
-                print("Problem trianing network: \(error)")
-            }
+            print ("Error less than \(errorThreshold), training finished. Last infered result: \(lastInferred)")
+        }
+        catch {
+            print("Problem trianing network: \(error)")
         }
     }
     
@@ -189,10 +204,10 @@ extension LearnViewController : DrawingViewDelegate {
             return
         }
         
-        assert(neuralNetwork.numInputs == grayscaleData.count, "number of inputs provided does not match FFNN's expected number of inputs")
+        assert(neuralNetwork.layerNodeCounts[0] == grayscaleData.count, "number of inputs provided does not match the neural network's expected number of inputs")
         
         do {
-            let output = try neuralNetwork.update(inputs: grayscaleData)
+            let output = try neuralNetwork.infer(grayscaleData)
             
             print("Output: \(output)")
             

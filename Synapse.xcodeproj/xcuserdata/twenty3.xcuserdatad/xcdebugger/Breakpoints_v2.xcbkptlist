@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Synapse/library/NeuralNet/Sources/NeuralNet.swift"
+            timestampString = "530824209.644315"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "randomizeWeights()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Synapse/library/NeuralNet/Sources/Error.swift"
+            timestampString = "530836971.662442"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "computeError(real:target:rows:cols:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Synapse.NeuralNet.ErrorFunction.computeError(real: Swift.Array&lt;Swift.Float&gt;, target: Swift.Array&lt;Swift.Float&gt;, rows: Swift.Int, cols: Swift.Int) -&gt; Swift.Float"
+                  moduleName = "Synapse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/twenty3/Projects/synapse/Synapse/library/NeuralNet/Sources/Error.swift"
+                  timestampString = "530776387.997466"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "168">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Float, (Swift.Float, Swift.Float)) -&gt; Swift.Float in Synapse.NeuralNet.ErrorFunction.computeError(real: Swift.Array&lt;Swift.Float&gt;, target: Swift.Array&lt;Swift.Float&gt;, rows: Swift.Int, cols: Swift.Int) -&gt; Swift.Float"
+                  moduleName = "Synapse"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/twenty3/Projects/synapse/Synapse/library/NeuralNet/Sources/Error.swift"
+                  timestampString = "530776387.99928"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Synapse/library/NeuralNet/Sources/Error.swift"
+            timestampString = "530836971.662763"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "computeError(real:target:rows:cols:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Synapse/library/NeuralNet/Sources/Error.swift"
+            timestampString = "530836971.662989"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "computeError(real:target:rows:cols:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

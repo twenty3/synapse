@@ -10,8 +10,6 @@
 		011CD7361CD6D83900CA1B53 /* UIImage+Synapse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011CD7351CD6D83900CA1B53 /* UIImage+Synapse.swift */; };
 		011CD7381CD72E2F00CA1B53 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011CD7371CD72E2F00CA1B53 /* Shape.swift */; };
 		014B683D1CDD0918005AAF08 /* ShapeClassifyingNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014B683C1CDD0918005AAF08 /* ShapeClassifyingNetwork.swift */; };
-		015658561CD9C49900B18BB7 /* FFNN+Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015658541CD9C49900B18BB7 /* FFNN+Storage.swift */; };
-		015658571CD9C49900B18BB7 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015658551CD9C49900B18BB7 /* Storage.swift */; };
 		015658591CD9C4BC00B18BB7 /* handwriting-ffnn in Resources */ = {isa = PBXBuildFile; fileRef = 015658581CD9C4BC00B18BB7 /* handwriting-ffnn */; };
 		01739A241CC47A1A008EDC90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01739A231CC47A1A008EDC90 /* AppDelegate.swift */; };
 		01739A2B1CC47A1A008EDC90 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01739A291CC47A1A008EDC90 /* Main.storyboard */; };
@@ -19,7 +17,13 @@
 		01739A301CC47A1A008EDC90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01739A2E1CC47A1A008EDC90 /* LaunchScreen.storyboard */; };
 		01739A391CC47B9C008EDC90 /* LearnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01739A371CC47B9C008EDC90 /* LearnViewController.swift */; };
 		01739A3C1CC47BBD008EDC90 /* CanvasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01739A3B1CC47BBD008EDC90 /* CanvasViewController.swift */; };
-		01739A3F1CC47E83008EDC90 /* FFNN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01739A3E1CC47E83008EDC90 /* FFNN.swift */; };
+		01BF8E281FA2EA0100085842 /* NeuralNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BF8E211FA2EA0100085842 /* NeuralNet.swift */; };
+		01BF8E291FA2EA0100085842 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BF8E221FA2EA0100085842 /* Storage.swift */; };
+		01BF8E2A1FA2EA0100085842 /* Activation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BF8E231FA2EA0100085842 /* Activation.swift */; };
+		01BF8E2B1FA2EA0100085842 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BF8E241FA2EA0100085842 /* Cache.swift */; };
+		01BF8E2C1FA2EA0100085842 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BF8E251FA2EA0100085842 /* Error.swift */; };
+		01BF8E2D1FA2EA0100085842 /* Structure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BF8E261FA2EA0100085842 /* Structure.swift */; };
+		01BF8E2E1FA2EA0100085842 /* Dataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BF8E271FA2EA0100085842 /* Dataset.swift */; };
 		01E271F11CC4928100B91EEB /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E271F01CC4928100B91EEB /* DrawingView.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,8 +31,6 @@
 		011CD7351CD6D83900CA1B53 /* UIImage+Synapse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Synapse.swift"; sourceTree = "<group>"; };
 		011CD7371CD72E2F00CA1B53 /* Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 		014B683C1CDD0918005AAF08 /* ShapeClassifyingNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeClassifyingNetwork.swift; sourceTree = "<group>"; };
-		015658541CD9C49900B18BB7 /* FFNN+Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "FFNN+Storage.swift"; path = "library/Swift-AI-master/Source/FFNN+Storage.swift"; sourceTree = "<group>"; };
-		015658551CD9C49900B18BB7 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Storage.swift; path = "library/Swift-AI-master/Source/Storage.swift"; sourceTree = "<group>"; };
 		015658581CD9C4BC00B18BB7 /* handwriting-ffnn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "handwriting-ffnn"; sourceTree = "<group>"; };
 		01739A201CC47A1A008EDC90 /* Synapse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Synapse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01739A231CC47A1A008EDC90 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -38,7 +40,13 @@
 		01739A311CC47A1A008EDC90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01739A371CC47B9C008EDC90 /* LearnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LearnViewController.swift; sourceTree = "<group>"; };
 		01739A3B1CC47BBD008EDC90 /* CanvasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasViewController.swift; sourceTree = "<group>"; };
-		01739A3E1CC47E83008EDC90 /* FFNN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FFNN.swift; path = "library/Swift-AI-master/Source/FFNN.swift"; sourceTree = "<group>"; };
+		01BF8E211FA2EA0100085842 /* NeuralNet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NeuralNet.swift; path = library/NeuralNet/Sources/NeuralNet.swift; sourceTree = "<group>"; };
+		01BF8E221FA2EA0100085842 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Storage.swift; path = library/NeuralNet/Sources/Storage.swift; sourceTree = "<group>"; };
+		01BF8E231FA2EA0100085842 /* Activation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Activation.swift; path = library/NeuralNet/Sources/Activation.swift; sourceTree = "<group>"; };
+		01BF8E241FA2EA0100085842 /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Cache.swift; path = library/NeuralNet/Sources/Cache.swift; sourceTree = "<group>"; };
+		01BF8E251FA2EA0100085842 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Error.swift; path = library/NeuralNet/Sources/Error.swift; sourceTree = "<group>"; };
+		01BF8E261FA2EA0100085842 /* Structure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Structure.swift; path = library/NeuralNet/Sources/Structure.swift; sourceTree = "<group>"; };
+		01BF8E271FA2EA0100085842 /* Dataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dataset.swift; path = library/NeuralNet/Sources/Dataset.swift; sourceTree = "<group>"; };
 		01E271F01CC4928100B91EEB /* DrawingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,9 +99,7 @@
 		01739A3D1CC47E58008EDC90 /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				01739A3E1CC47E83008EDC90 /* FFNN.swift */,
-				015658541CD9C49900B18BB7 /* FFNN+Storage.swift */,
-				015658551CD9C49900B18BB7 /* Storage.swift */,
+				01BF8E201FA2E9C600085842 /* NeuralNet */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -105,6 +111,20 @@
 				014B683C1CDD0918005AAF08 /* ShapeClassifyingNetwork.swift */,
 			);
 			name = "Shape NN";
+			sourceTree = "<group>";
+		};
+		01BF8E201FA2E9C600085842 /* NeuralNet */ = {
+			isa = PBXGroup;
+			children = (
+				01BF8E231FA2EA0100085842 /* Activation.swift */,
+				01BF8E241FA2EA0100085842 /* Cache.swift */,
+				01BF8E271FA2EA0100085842 /* Dataset.swift */,
+				01BF8E251FA2EA0100085842 /* Error.swift */,
+				01BF8E211FA2EA0100085842 /* NeuralNet.swift */,
+				01BF8E221FA2EA0100085842 /* Storage.swift */,
+				01BF8E261FA2EA0100085842 /* Structure.swift */,
+			);
+			name = NeuralNet;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,15 +201,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01BF8E2B1FA2EA0100085842 /* Cache.swift in Sources */,
 				01739A391CC47B9C008EDC90 /* LearnViewController.swift in Sources */,
-				01739A3F1CC47E83008EDC90 /* FFNN.swift in Sources */,
+				01BF8E281FA2EA0100085842 /* NeuralNet.swift in Sources */,
+				01BF8E2E1FA2EA0100085842 /* Dataset.swift in Sources */,
 				01E271F11CC4928100B91EEB /* DrawingView.swift in Sources */,
 				014B683D1CDD0918005AAF08 /* ShapeClassifyingNetwork.swift in Sources */,
+				01BF8E291FA2EA0100085842 /* Storage.swift in Sources */,
 				011CD7381CD72E2F00CA1B53 /* Shape.swift in Sources */,
 				011CD7361CD6D83900CA1B53 /* UIImage+Synapse.swift in Sources */,
-				015658571CD9C49900B18BB7 /* Storage.swift in Sources */,
-				015658561CD9C49900B18BB7 /* FFNN+Storage.swift in Sources */,
+				01BF8E2D1FA2EA0100085842 /* Structure.swift in Sources */,
 				01739A3C1CC47BBD008EDC90 /* CanvasViewController.swift in Sources */,
+				01BF8E2A1FA2EA0100085842 /* Activation.swift in Sources */,
+				01BF8E2C1FA2EA0100085842 /* Error.swift in Sources */,
 				01739A241CC47A1A008EDC90 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

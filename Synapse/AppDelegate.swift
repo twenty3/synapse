@@ -24,17 +24,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             // our input data is an image that is 28 x 28 'pixels'
         
         // load a saved network if we have one
-        if let savedNetwork = FFNN.fromFile("shapes-ffnn") {
+        
+        if let savedNetwork = try? NeuralNet(url: URL.documentsURL(with: "shapes-ffnn")) {
             print("Loaded a trained network from the documents directory")
             self.shapeClassifyingNetwork = ShapeClasifyingNetwork(neuralNework: savedNetwork, inputDimension: inputDataDimension)
         }
         else {
             print("Did not find a saved network, creating a new one")
         
-            let newNetwork = FFNN(inputs: inputDataDimension * inputDataDimension, hidden: 280, outputs: Shape.count, learningRate: 0.75, momentum: 0.1, weights: nil, activationFunction: ActivationFunction.Default, errorFunction: ErrorFunction.default(average: true))
-            self.shapeClassifyingNetwork = ShapeClasifyingNetwork(neuralNework: newNetwork, inputDimension: inputDataDimension)
+            do {
+                let structure = try NeuralNet.Structure(
+                    nodes: [inputDataDimension*inputDataDimension, 280, Shape.count],
+                    hiddenActivation: NeuralNet.ActivationFunction.Hidden.sigmoid,
+                    outputActivation: NeuralNet.ActivationFunction.Output.sigmoid,
+                    batchSize: 1,
+                    learningRate: 0.1,
+                    momentum: 0.25
+                )
+                
+                let newNetwork = try NeuralNet(structure: structure)
+                self.shapeClassifyingNetwork = ShapeClasifyingNetwork(neuralNework: newNetwork, inputDimension: inputDataDimension)
+            }
+            catch {
+                print(error)
+            }
         }
-        
         
         let learnNavigationController = splitViewController.viewControllers[0] as! UINavigationController
         let learnViewController = learnNavigationController.viewControllers[0] as! LearnViewController
@@ -42,6 +56,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         
         return true
     }
+}
 
+extension URL {
+    static func documentsURL(with filename: String) -> URL {
+        let manager = FileManager.default
+        let dirURL = try! manager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+        return dirURL.appendingPathComponent(filename)
+    }
 }
 
