@@ -7,16 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		011CD7361CD6D83900CA1B53 /* UIImage+Synapse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011CD7351CD6D83900CA1B53 /* UIImage+Synapse.swift */; };
-		011CD7381CD72E2F00CA1B53 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011CD7371CD72E2F00CA1B53 /* Shape.swift */; };
-		014B683D1CDD0918005AAF08 /* ShapeClassifyingNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014B683C1CDD0918005AAF08 /* ShapeClassifyingNetwork.swift */; };
-		015658591CD9C4BC00B18BB7 /* handwriting-ffnn in Resources */ = {isa = PBXBuildFile; fileRef = 015658581CD9C4BC00B18BB7 /* handwriting-ffnn */; };
-		01739A241CC47A1A008EDC90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01739A231CC47A1A008EDC90 /* AppDelegate.swift */; };
 		01739A2B1CC47A1A008EDC90 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01739A291CC47A1A008EDC90 /* Main.storyboard */; };
 		01739A2D1CC47A1A008EDC90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01739A2C1CC47A1A008EDC90 /* Assets.xcassets */; };
 		01739A301CC47A1A008EDC90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01739A2E1CC47A1A008EDC90 /* LaunchScreen.storyboard */; };
-		01739A391CC47B9C008EDC90 /* LearnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01739A371CC47B9C008EDC90 /* LearnViewController.swift */; };
-		01739A3C1CC47BBD008EDC90 /* CanvasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01739A3B1CC47BBD008EDC90 /* CanvasViewController.swift */; };
 		01BF8E281FA2EA0100085842 /* NeuralNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BF8E211FA2EA0100085842 /* NeuralNet.swift */; };
 		01BF8E291FA2EA0100085842 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BF8E221FA2EA0100085842 /* Storage.swift */; };
 		01BF8E2A1FA2EA0100085842 /* Activation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BF8E231FA2EA0100085842 /* Activation.swift */; };
@@ -24,22 +17,25 @@
 		01BF8E2C1FA2EA0100085842 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BF8E251FA2EA0100085842 /* Error.swift */; };
 		01BF8E2D1FA2EA0100085842 /* Structure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BF8E261FA2EA0100085842 /* Structure.swift */; };
 		01BF8E2E1FA2EA0100085842 /* Dataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BF8E271FA2EA0100085842 /* Dataset.swift */; };
-		01E271F11CC4928100B91EEB /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E271F01CC4928100B91EEB /* DrawingView.swift */; };
+		01EA7BE52174127A00F866E5 /* CanvasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EA7BDE2174127A00F866E5 /* CanvasViewController.swift */; };
+		01EA7BE62174127A00F866E5 /* LearnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EA7BDF2174127A00F866E5 /* LearnViewController.swift */; };
+		01EA7BE72174127A00F866E5 /* ShapeClassifyingNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EA7BE02174127A00F866E5 /* ShapeClassifyingNetwork.swift */; };
+		01EA7BE82174127A00F866E5 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EA7BE12174127A00F866E5 /* Shape.swift */; };
+		01EA7BE92174127A00F866E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EA7BE22174127A00F866E5 /* AppDelegate.swift */; };
+		01EA7BEA2174127A00F866E5 /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EA7BE32174127A00F866E5 /* DrawingView.swift */; };
+		01EA7BEB2174127A00F866E5 /* UIImage+Synapse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EA7BE42174127A00F866E5 /* UIImage+Synapse.swift */; };
+		01EA7BEF2174169900F866E5 /* ImageClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 01EA7BED2174169900F866E5 /* ImageClassifier.mlmodel */; };
+		01EA7BF42174182300F866E5 /* CoreML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EA7BF32174182300F866E5 /* CoreML.framework */; };
+		01EA7BF6217418DE00F866E5 /* shapes-ffnn in Resources */ = {isa = PBXBuildFile; fileRef = 01EA7BF5217418DE00F866E5 /* shapes-ffnn */; };
+		01EA7BF921743CF400F866E5 /* Vision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EA7BF821743CF400F866E5 /* Vision.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		011CD7351CD6D83900CA1B53 /* UIImage+Synapse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Synapse.swift"; sourceTree = "<group>"; };
-		011CD7371CD72E2F00CA1B53 /* Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
-		014B683C1CDD0918005AAF08 /* ShapeClassifyingNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeClassifyingNetwork.swift; sourceTree = "<group>"; };
-		015658581CD9C4BC00B18BB7 /* handwriting-ffnn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "handwriting-ffnn"; sourceTree = "<group>"; };
 		01739A201CC47A1A008EDC90 /* Synapse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Synapse.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		01739A231CC47A1A008EDC90 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01739A2A1CC47A1A008EDC90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		01739A2C1CC47A1A008EDC90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01739A2F1CC47A1A008EDC90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		01739A311CC47A1A008EDC90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		01739A371CC47B9C008EDC90 /* LearnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LearnViewController.swift; sourceTree = "<group>"; };
-		01739A3B1CC47BBD008EDC90 /* CanvasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasViewController.swift; sourceTree = "<group>"; };
 		01BF8E211FA2EA0100085842 /* NeuralNet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NeuralNet.swift; path = library/NeuralNet/Sources/NeuralNet.swift; sourceTree = "<group>"; };
 		01BF8E221FA2EA0100085842 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Storage.swift; path = library/NeuralNet/Sources/Storage.swift; sourceTree = "<group>"; };
 		01BF8E231FA2EA0100085842 /* Activation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Activation.swift; path = library/NeuralNet/Sources/Activation.swift; sourceTree = "<group>"; };
@@ -47,7 +43,17 @@
 		01BF8E251FA2EA0100085842 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Error.swift; path = library/NeuralNet/Sources/Error.swift; sourceTree = "<group>"; };
 		01BF8E261FA2EA0100085842 /* Structure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Structure.swift; path = library/NeuralNet/Sources/Structure.swift; sourceTree = "<group>"; };
 		01BF8E271FA2EA0100085842 /* Dataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dataset.swift; path = library/NeuralNet/Sources/Dataset.swift; sourceTree = "<group>"; };
-		01E271F01CC4928100B91EEB /* DrawingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
+		01EA7BDE2174127A00F866E5 /* CanvasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CanvasViewController.swift; path = source/CanvasViewController.swift; sourceTree = "<group>"; };
+		01EA7BDF2174127A00F866E5 /* LearnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LearnViewController.swift; path = source/LearnViewController.swift; sourceTree = "<group>"; };
+		01EA7BE02174127A00F866E5 /* ShapeClassifyingNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShapeClassifyingNetwork.swift; path = source/ShapeClassifyingNetwork.swift; sourceTree = "<group>"; };
+		01EA7BE12174127A00F866E5 /* Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Shape.swift; path = source/Shape.swift; sourceTree = "<group>"; };
+		01EA7BE22174127A00F866E5 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = source/AppDelegate.swift; sourceTree = "<group>"; };
+		01EA7BE32174127A00F866E5 /* DrawingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrawingView.swift; path = source/DrawingView.swift; sourceTree = "<group>"; };
+		01EA7BE42174127A00F866E5 /* UIImage+Synapse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+Synapse.swift"; path = "source/UIImage+Synapse.swift"; sourceTree = "<group>"; };
+		01EA7BED2174169900F866E5 /* ImageClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = ImageClassifier.mlmodel; path = model/ImageClassifier.mlmodel; sourceTree = "<group>"; };
+		01EA7BF32174182300F866E5 /* CoreML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreML.framework; path = System/Library/Frameworks/CoreML.framework; sourceTree = SDKROOT; };
+		01EA7BF5217418DE00F866E5 /* shapes-ffnn */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "shapes-ffnn"; sourceTree = "<group>"; };
+		01EA7BF821743CF400F866E5 /* Vision.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vision.framework; path = System/Library/Frameworks/Vision.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +61,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01EA7BF921743CF400F866E5 /* Vision.framework in Frameworks */,
+				01EA7BF42174182300F866E5 /* CoreML.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +74,7 @@
 			children = (
 				01739A221CC47A1A008EDC90 /* Synapse */,
 				01739A211CC47A1A008EDC90 /* Products */,
+				01EA7BF22174182300F866E5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -80,14 +89,15 @@
 		01739A221CC47A1A008EDC90 /* Synapse */ = {
 			isa = PBXGroup;
 			children = (
-				015658581CD9C4BC00B18BB7 /* handwriting-ffnn */,
-				01739A231CC47A1A008EDC90 /* AppDelegate.swift */,
-				01739A3B1CC47BBD008EDC90 /* CanvasViewController.swift */,
-				01739A371CC47B9C008EDC90 /* LearnViewController.swift */,
-				01E271F01CC4928100B91EEB /* DrawingView.swift */,
-				01AAB2171D6C13CA00D678F3 /* Shape NN */,
-				011CD7351CD6D83900CA1B53 /* UIImage+Synapse.swift */,
+				01EA7BF1217416A900F866E5 /* model */,
 				01739A291CC47A1A008EDC90 /* Main.storyboard */,
+				01EA7BE22174127A00F866E5 /* AppDelegate.swift */,
+				01EA7BDE2174127A00F866E5 /* CanvasViewController.swift */,
+				01EA7BE32174127A00F866E5 /* DrawingView.swift */,
+				01EA7BDF2174127A00F866E5 /* LearnViewController.swift */,
+				01EA7BE12174127A00F866E5 /* Shape.swift */,
+				01EA7BE02174127A00F866E5 /* ShapeClassifyingNetwork.swift */,
+				01EA7BE42174127A00F866E5 /* UIImage+Synapse.swift */,
 				01739A3D1CC47E58008EDC90 /* Library */,
 				01739A2C1CC47A1A008EDC90 /* Assets.xcassets */,
 				01739A2E1CC47A1A008EDC90 /* LaunchScreen.storyboard */,
@@ -104,15 +114,6 @@
 			name = Library;
 			sourceTree = "<group>";
 		};
-		01AAB2171D6C13CA00D678F3 /* Shape NN */ = {
-			isa = PBXGroup;
-			children = (
-				011CD7371CD72E2F00CA1B53 /* Shape.swift */,
-				014B683C1CDD0918005AAF08 /* ShapeClassifyingNetwork.swift */,
-			);
-			name = "Shape NN";
-			sourceTree = "<group>";
-		};
 		01BF8E201FA2E9C600085842 /* NeuralNet */ = {
 			isa = PBXGroup;
 			children = (
@@ -125,6 +126,24 @@
 				01BF8E261FA2EA0100085842 /* Structure.swift */,
 			);
 			name = NeuralNet;
+			sourceTree = "<group>";
+		};
+		01EA7BF1217416A900F866E5 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				01EA7BF5217418DE00F866E5 /* shapes-ffnn */,
+				01EA7BED2174169900F866E5 /* ImageClassifier.mlmodel */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		01EA7BF22174182300F866E5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				01EA7BF821743CF400F866E5 /* Vision.framework */,
+				01EA7BF32174182300F866E5 /* CoreML.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,7 +206,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				015658591CD9C4BC00B18BB7 /* handwriting-ffnn in Resources */,
+				01EA7BF6217418DE00F866E5 /* shapes-ffnn in Resources */,
 				01739A301CC47A1A008EDC90 /* LaunchScreen.storyboard in Resources */,
 				01739A2D1CC47A1A008EDC90 /* Assets.xcassets in Resources */,
 				01739A2B1CC47A1A008EDC90 /* Main.storyboard in Resources */,
@@ -201,20 +220,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01EA7BE52174127A00F866E5 /* CanvasViewController.swift in Sources */,
 				01BF8E2B1FA2EA0100085842 /* Cache.swift in Sources */,
-				01739A391CC47B9C008EDC90 /* LearnViewController.swift in Sources */,
 				01BF8E281FA2EA0100085842 /* NeuralNet.swift in Sources */,
+				01EA7BEB2174127A00F866E5 /* UIImage+Synapse.swift in Sources */,
+				01EA7BEF2174169900F866E5 /* ImageClassifier.mlmodel in Sources */,
+				01EA7BEA2174127A00F866E5 /* DrawingView.swift in Sources */,
+				01EA7BE92174127A00F866E5 /* AppDelegate.swift in Sources */,
+				01EA7BE82174127A00F866E5 /* Shape.swift in Sources */,
 				01BF8E2E1FA2EA0100085842 /* Dataset.swift in Sources */,
-				01E271F11CC4928100B91EEB /* DrawingView.swift in Sources */,
-				014B683D1CDD0918005AAF08 /* ShapeClassifyingNetwork.swift in Sources */,
+				01EA7BE72174127A00F866E5 /* ShapeClassifyingNetwork.swift in Sources */,
+				01EA7BE62174127A00F866E5 /* LearnViewController.swift in Sources */,
 				01BF8E291FA2EA0100085842 /* Storage.swift in Sources */,
-				011CD7381CD72E2F00CA1B53 /* Shape.swift in Sources */,
-				011CD7361CD6D83900CA1B53 /* UIImage+Synapse.swift in Sources */,
 				01BF8E2D1FA2EA0100085842 /* Structure.swift in Sources */,
-				01739A3C1CC47BBD008EDC90 /* CanvasViewController.swift in Sources */,
 				01BF8E2A1FA2EA0100085842 /* Activation.swift in Sources */,
 				01BF8E2C1FA2EA0100085842 /* Error.swift in Sources */,
-				01739A241CC47A1A008EDC90 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
