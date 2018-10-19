@@ -139,6 +139,21 @@ class LearnViewController: UIViewController {
             }, completion: nil)
     }
     
+    //MARK: Benchmarking
+    
+    private var startTime: DispatchTime?
+    private func startTimer() {
+        startTime = DispatchTime.now()
+    }
+    
+    private func endTimer() -> Double {
+        guard let startTime = self.startTime else { return 0 }
+        let end = DispatchTime.now()
+        let nanoseconds = end.uptimeNanoseconds - startTime.uptimeNanoseconds
+        let milliseconds = Double(nanoseconds) / Double(NSEC_PER_MSEC)
+        return milliseconds
+    }
+    
     //MARK: Training
     
     func trainNetwork(withInputData inputData: [Float], correctShape: Shape) {
@@ -210,11 +225,16 @@ class LearnViewController: UIViewController {
     }
 }
 
+
 // MARK: - Swift AI Classifcation
 extension LearnViewController {
-    
     private func classify(image: UIImage, with classifier: ShapeClasifyingNetwork, label: Shape?) -> (Shape?, Float?) {
+        
+        startTimer()
         let grayscaleData = image.grayscaleImageData(inverted:true)
+        let milliseconds = endTimer()
+        print("Grayscale conversion took \(milliseconds)ms")
+
         //printInputData(grayscaleData, stride: dimension)
         
         let neuralNetwork = classifier.neuralNework
@@ -222,7 +242,12 @@ extension LearnViewController {
         assert(neuralNetwork.layerNodeCounts[0] == grayscaleData.count, "number of inputs provided does not match the neural network's expected number of inputs")
         
         do {
+            
+            startTimer()
             let output = try neuralNetwork.infer(grayscaleData)
+            let milliseconds = endTimer()
+            
+            print("Classifying took \(milliseconds) ms")
             print("Output: \(output)")
             
             if let shapeToLearn = label {
@@ -276,8 +301,6 @@ extension LearnViewController {
             return
         }
         
-        //TODO: need to deal with the fact that this is asynchronous and make sure we handle stacked requests properly
-        
         DispatchQueue.global(qos: .userInitiated).async {
             let orientation = CGImagePropertyOrientation(rawValue: UInt32(image.imageOrientation.rawValue)) ?? .up
             let handler = VNImageRequestHandler(cgImage: cgImage, orientation: orientation)
@@ -298,6 +321,9 @@ extension LearnViewController {
         }
         
         let classifications = results as! [VNClassificationObservation]
+        
+        let milliseconds = endTimer()
+        print("Classifying took \(milliseconds)ms")
         
         guard !classifications.isEmpty else {
             print("Nothing was recognized")
@@ -347,14 +373,18 @@ extension LearnViewController : DrawingViewDelegate {
             // since our network was trained on images drawn at 28 x 28 (and then upscaled during training by CreateML) we'll use the same dimensions here to produce our source image and let the Vision framework scale the result up to what the model expects
             
             let inputDataDimension = 28.0
+            startTimer()
             let downsampledImage = drawingView.drawingAsImage(withSize: CGSize(width: inputDataDimension, height: inputDataDimension))
+            let milliseconds = endTimer()
+            print("Scaling image took \(milliseconds)ms")
             sampleImageView.image = downsampledImage
-
+            
             guard let model = coreMLClassifier?.model else{
                 print("Learn controller does not have a coreML model to work with!")
                 return
             }
             
+            startTimer()
             classify(image: downsampledImage, with: model, label: selectedShape)
         }
         else  {
@@ -367,8 +397,11 @@ extension LearnViewController : DrawingViewDelegate {
             }
             
             // Get an appropriately scaled image with constant stroke width
+            startTimer()
             let scaledImage = drawingView.drawingAsImage(withSize: CGSize(width: dimension, height: dimension))
             sampleImageView.image = scaledImage
+            let milliseconds = endTimer()
+            print("Scaling image took \(milliseconds)ms")
             
             guard let shapeClassifyingNetwork = shapeClassifyingNetwork else {
                 print("Learn controller does not have a neural network to work with!")
