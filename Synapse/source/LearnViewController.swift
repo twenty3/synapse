@@ -348,7 +348,6 @@ extension LearnViewController {
             self.update(with: shape, confidence: confidence)
         }
     }
-    
 }
 
 // MARK: DrawingViewDelegate
@@ -363,7 +362,7 @@ extension LearnViewController : DrawingViewDelegate {
         return minimumSize
     }
     
-    func drawingView(_ drawingView: DrawingView, didFinishDrawingImage image: UIImage) {
+    func drawingView(_ drawingView: DrawingView, didFinishDrawingImage image: UIImage, at frame: CGRect) {
         
         let useCoreML = useCoreMLSwitch.isOn
         

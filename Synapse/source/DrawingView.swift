@@ -12,7 +12,7 @@ import UIKit
 
 protocol DrawingViewDelegate: class {
     func minimumImageSizeForDrawingView(_ drawingView: DrawingView) -> CGSize
-    func drawingView(_ drawingView: DrawingView, didFinishDrawingImage image: UIImage)
+    func drawingView(_ drawingView: DrawingView, didFinishDrawingImage image: UIImage, at frame: CGRect)
 }
 
 // MARK: - DrawingView
@@ -213,7 +213,7 @@ class DrawingView: UIView {
     
     @objc private func strokeTimerFired(_ sender: Timer){
         let drawingImage = self.drawingAsImage()
-        self.delegate?.drawingView(self, didFinishDrawingImage: drawingImage)
+        self.delegate?.drawingView(self, didFinishDrawingImage: drawingImage, at: self.path.bounds)
         
         self.clearDrawing()
     }

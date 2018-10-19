@@ -67,6 +67,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         learnViewController.shapeClassifyingNetwork = self.shapeClassifyingNetwork
         learnViewController.coreMLClassifier = self.shapeClassifier
         
+        let canvasNavigationController = splitViewController.viewControllers[1] as! UINavigationController
+        let canvasViewController = canvasNavigationController.viewControllers[0] as! CanvasViewController
+        canvasViewController.shapeClassifyingNetwork = self.shapeClassifyingNetwork
+        canvasViewController.coreMLClassifier = self.shapeClassifier
+        
         return true
     }
 }

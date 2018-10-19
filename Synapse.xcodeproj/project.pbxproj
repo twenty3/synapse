@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01386FBF2179C61A0072454C /* ShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01386FBE2179C61A0072454C /* ShapeView.swift */; };
 		01739A2B1CC47A1A008EDC90 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01739A291CC47A1A008EDC90 /* Main.storyboard */; };
 		01739A2D1CC47A1A008EDC90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01739A2C1CC47A1A008EDC90 /* Assets.xcassets */; };
 		01739A301CC47A1A008EDC90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01739A2E1CC47A1A008EDC90 /* LaunchScreen.storyboard */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01386FBE2179C61A0072454C /* ShapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShapeView.swift; path = source/ShapeView.swift; sourceTree = "<group>"; };
 		01739A201CC47A1A008EDC90 /* Synapse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Synapse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01739A2A1CC47A1A008EDC90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		01739A2C1CC47A1A008EDC90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -92,9 +94,10 @@
 				01EA7BF1217416A900F866E5 /* model */,
 				01739A291CC47A1A008EDC90 /* Main.storyboard */,
 				01EA7BE22174127A00F866E5 /* AppDelegate.swift */,
+				01EA7BDF2174127A00F866E5 /* LearnViewController.swift */,
 				01EA7BDE2174127A00F866E5 /* CanvasViewController.swift */,
 				01EA7BE32174127A00F866E5 /* DrawingView.swift */,
-				01EA7BDF2174127A00F866E5 /* LearnViewController.swift */,
+				01386FBE2179C61A0072454C /* ShapeView.swift */,
 				01EA7BE12174127A00F866E5 /* Shape.swift */,
 				01EA7BE02174127A00F866E5 /* ShapeClassifyingNetwork.swift */,
 				01EA7BE42174127A00F866E5 /* UIImage+Synapse.swift */,
@@ -226,6 +229,7 @@
 				01EA7BEB2174127A00F866E5 /* UIImage+Synapse.swift in Sources */,
 				01EA7BEF2174169900F866E5 /* ImageClassifier.mlmodel in Sources */,
 				01EA7BEA2174127A00F866E5 /* DrawingView.swift in Sources */,
+				01386FBF2179C61A0072454C /* ShapeView.swift in Sources */,
 				01EA7BE92174127A00F866E5 /* AppDelegate.swift in Sources */,
 				01EA7BE82174127A00F866E5 /* Shape.swift in Sources */,
 				01BF8E2E1FA2EA0100085842 /* Dataset.swift in Sources */,
