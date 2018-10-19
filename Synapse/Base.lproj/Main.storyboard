@@ -326,21 +326,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="41h-0Z-E21">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="41h-0Z-E21">
                                 <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bUP-VW-VZO" customClass="DrawingView" customModule="Synapse" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bUP-VW-VZO" customClass="DrawingView" customModule="Synapse" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Draw Shapes Here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="86V-KN-KSa">
+                                        <rect key="frame" x="274" y="537" width="286" height="38"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="32"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="86V-KN-KSa" firstAttribute="centerX" secondItem="bUP-VW-VZO" secondAttribute="centerX" id="dyR-pu-JXW"/>
+                                    <constraint firstItem="86V-KN-KSa" firstAttribute="centerY" secondItem="bUP-VW-VZO" secondAttribute="centerY" id="eOo-mv-iEj"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="bUP-VW-VZO" firstAttribute="leading" secondItem="60d-T1-MKM" secondAttribute="leading" id="aGU-F2-ht0"/>
+                            <constraint firstItem="bUP-VW-VZO" firstAttribute="top" secondItem="60d-T1-MKM" secondAttribute="top" id="b2a-di-MRr"/>
+                            <constraint firstItem="bUP-VW-VZO" firstAttribute="trailing" secondItem="41h-0Z-E21" secondAttribute="trailing" id="bDy-sE-tIh"/>
+                            <constraint firstItem="bUP-VW-VZO" firstAttribute="bottom" secondItem="41h-0Z-E21" secondAttribute="bottom" id="gAE-9R-g6B"/>
+                            <constraint firstItem="bUP-VW-VZO" firstAttribute="leading" secondItem="41h-0Z-E21" secondAttribute="leading" id="kgQ-Er-hqK"/>
+                            <constraint firstItem="bUP-VW-VZO" firstAttribute="top" secondItem="41h-0Z-E21" secondAttribute="top" id="nXl-nT-nky"/>
+                            <constraint firstAttribute="trailing" secondItem="bUP-VW-VZO" secondAttribute="trailing" id="uQB-Yv-Otb"/>
+                            <constraint firstItem="bUP-VW-VZO" firstAttribute="bottom" secondItem="1Zs-jb-7g4" secondAttribute="top" id="zdi-n7-j8h"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ylI-ZP-48B"/>
                     <connections>
+                        <outlet property="canvasLabel" destination="86V-KN-KSa" id="HYu-V2-0Bi"/>
                         <outlet property="contentView" destination="41h-0Z-E21" id="oZk-TI-7Hr"/>
                         <outlet property="drawingView" destination="bUP-VW-VZO" id="dM6-MG-naS"/>
                     </connections>

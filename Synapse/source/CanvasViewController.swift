@@ -20,6 +20,7 @@ class CanvasViewController: UIViewController {
     // MARK: - Private Properties
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var drawingView: DrawingView!
+    @IBOutlet weak var canvasLabel: UILabel!
     
     var shapeViews = [ShapeView]()
     
@@ -28,6 +29,16 @@ class CanvasViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         drawingView.delegate = self;
+    }
+    
+    private func updateLabel() {
+        guard !canvasLabel.isHidden else { return }
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.canvasLabel.alpha = 0.0
+        }) { (_) in
+            self.canvasLabel.isHidden = true
+        }
     }
     
     private func detected(_ shape: Shape?, confidence: Float?, at frame: CGRect) {
@@ -42,7 +53,6 @@ class CanvasViewController: UIViewController {
         
         shapeViews.append(shapeView)
         self.contentView.addSubview(shapeView)
-        
     }
 }
 
@@ -60,7 +70,7 @@ extension CanvasViewController : DrawingViewDelegate {
     
     func drawingView(_ drawingView: DrawingView, didFinishDrawingImage image: UIImage, at frame: CGRect) {
         
-        let useCoreML = true
+        let useCoreML = false
         
         if useCoreML {
             let inputDataDimension = 28.0
@@ -86,6 +96,8 @@ extension CanvasViewController : DrawingViewDelegate {
             let (shape, confidence) = classify(image: scaledImage, with: shapeClassifyingNetwork)
             detected(shape, confidence: confidence, at: frame)
         }
+        
+        updateLabel()
     }
 }
 
