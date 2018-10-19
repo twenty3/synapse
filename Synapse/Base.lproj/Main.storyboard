@@ -326,24 +326,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Canvas View" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="32g-rE-Ynl">
-                                <rect key="frame" x="321" y="536.5" width="192" height="39"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="41h-0Z-E21">
+                                <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bUP-VW-VZO" customClass="DrawingView" customModule="Synapse" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="32g-rE-Ynl" firstAttribute="centerY" secondItem="60d-T1-MKM" secondAttribute="centerY" id="JhZ-ii-Iwe"/>
-                            <constraint firstItem="32g-rE-Ynl" firstAttribute="centerX" secondItem="60d-T1-MKM" secondAttribute="centerX" id="W0l-3M-nHS"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ylI-ZP-48B"/>
+                    <connections>
+                        <outlet property="contentView" destination="41h-0Z-E21" id="oZk-TI-7Hr"/>
+                        <outlet property="drawingView" destination="bUP-VW-VZO" id="dM6-MG-naS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="34c-q4-s82" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="744" y="123"/>
+            <point key="canvasLocation" x="743.88489208633098" y="122.48201438848922"/>
         </scene>
     </scenes>
 </document>
